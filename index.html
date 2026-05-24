@@ -1,1 +1,744 @@
-# MDCAT-2026-Mock-Test-By-Muzamil-Hussain
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Muzamil Hussain MDCAT Instructor</title>
+<link href="https://fonts.googleapis.com/css2?family=Noto+Nastaliq+Urdu&family=IBM+Plex+Sans:wght@400;500;600;700&family=IBM+Plex+Mono:wght@500&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --navy: #0a1628;
+    --blue: #1a3c5e;
+    --accent: #00b4d8;
+    --gold: #f4a01c;
+    --green: #06d6a0;
+    --red: #ef476f;
+    --light: #f0f4f8;
+    --white: #ffffff;
+    --card: #ffffff;
+    --border: #d1dde8;
+  }
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+  body {
+    font-family: 'IBM Plex Sans', sans-serif;
+    background: var(--navy);
+    color: #1a1a2e;
+    min-height: 100vh;
+  }
+
+  /* ===== WELCOME SCREEN ===== */
+  #welcome {
+    min-height: 100vh;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    background: linear-gradient(135deg, #0a1628 0%, #1a3c5e 50%, #0a1628 100%);
+    padding: 20px;
+    text-align: center;
+  }
+  .logo-badge {
+    background: var(--gold);
+    color: var(--navy);
+    font-weight: 700;
+    font-size: 13px;
+    padding: 6px 18px;
+    border-radius: 20px;
+    letter-spacing: 2px;
+    text-transform: uppercase;
+    margin-bottom: 24px;
+  }
+  #welcome h1 {
+    font-size: clamp(28px, 5vw, 52px);
+    font-weight: 700;
+    color: white;
+    line-height: 1.15;
+    margin-bottom: 10px;
+  }
+  #welcome h1 span { color: var(--accent); }
+  #welcome p {
+    color: #8bafc8;
+    font-size: 16px;
+    margin-bottom: 36px;
+    max-width: 480px;
+  }
+  .stats-row {
+    display: flex;
+    gap: 16px;
+    margin-bottom: 36px;
+    flex-wrap: wrap;
+    justify-content: center;
+  }
+  .stat-box {
+    background: rgba(255,255,255,0.08);
+    border: 1px solid rgba(255,255,255,0.12);
+    border-radius: 12px;
+    padding: 16px 22px;
+    color: white;
+    text-align: center;
+    min-width: 110px;
+  }
+  .stat-box .num { font-size: 28px; font-weight: 700; color: var(--accent); }
+  .stat-box .lbl { font-size: 11px; color: #8bafc8; margin-top: 2px; text-transform: uppercase; letter-spacing: 1px; }
+  .name-input-wrap {
+    display: flex;
+    gap: 10px;
+    margin-bottom: 20px;
+    flex-wrap: wrap;
+    justify-content: center;
+    width: 100%;
+    max-width: 420px;
+  }
+  .name-input-wrap input {
+    flex: 1;
+    min-width: 200px;
+    padding: 14px 18px;
+    border-radius: 10px;
+    border: 2px solid rgba(255,255,255,0.15);
+    background: rgba(255,255,255,0.08);
+    color: white;
+    font-size: 15px;
+    font-family: inherit;
+    outline: none;
+    transition: border 0.2s;
+  }
+  .name-input-wrap input::placeholder { color: #8bafc8; }
+  .name-input-wrap input:focus { border-color: var(--accent); }
+  .btn-start {
+    background: var(--gold);
+    color: var(--navy);
+    border: none;
+    padding: 15px 36px;
+    border-radius: 10px;
+    font-size: 16px;
+    font-weight: 700;
+    cursor: pointer;
+    transition: transform 0.15s, box-shadow 0.15s;
+    letter-spacing: 0.5px;
+  }
+  .btn-start:hover { transform: translateY(-2px); box-shadow: 0 8px 24px rgba(244,160,28,0.4); }
+  .instructions {
+    background: rgba(255,255,255,0.06);
+    border: 1px solid rgba(255,255,255,0.1);
+    border-radius: 12px;
+    padding: 18px 24px;
+    color: #8bafc8;
+    font-size: 13px;
+    max-width: 480px;
+    text-align: left;
+    line-height: 1.8;
+    margin-top: 10px;
+  }
+  .instructions b { color: var(--gold); }
+
+  /* ===== QUIZ SCREEN ===== */
+  #quiz { display: none; min-height: 100vh; background: var(--light); }
+
+  .quiz-header {
+    background: var(--navy);
+    padding: 14px 20px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    position: sticky;
+    top: 0;
+    z-index: 100;
+    gap: 10px;
+    flex-wrap: wrap;
+  }
+  .quiz-header .left { display: flex; align-items: center; gap: 12px; }
+  .section-tag {
+    background: var(--gold);
+    color: var(--navy);
+    font-size: 11px;
+    font-weight: 700;
+    padding: 4px 12px;
+    border-radius: 20px;
+    letter-spacing: 1px;
+    text-transform: uppercase;
+    white-space: nowrap;
+  }
+  .q-counter { color: white; font-size: 14px; font-weight: 600; white-space: nowrap; }
+  .timer-box {
+    background: rgba(255,255,255,0.1);
+    border-radius: 8px;
+    padding: 6px 14px;
+    color: var(--accent);
+    font-family: 'IBM Plex Mono', monospace;
+    font-size: 16px;
+    font-weight: 500;
+    white-space: nowrap;
+  }
+  .timer-box.warning { color: var(--gold); animation: pulse 1s infinite; }
+  .timer-box.danger { color: var(--red); animation: pulse 0.5s infinite; }
+  @keyframes pulse { 0%,100%{opacity:1} 50%{opacity:0.6} }
+
+  .progress-bar { height: 4px; background: rgba(255,255,255,0.1); position: relative; }
+  .progress-fill {
+    height: 100%;
+    background: linear-gradient(90deg, var(--accent), var(--gold));
+    transition: width 0.3s ease;
+  }
+
+  .quiz-body { max-width: 760px; margin: 0 auto; padding: 24px 16px 100px; }
+
+  .question-card {
+    background: white;
+    border-radius: 16px;
+    padding: 28px;
+    box-shadow: 0 4px 20px rgba(0,0,0,0.08);
+    margin-bottom: 16px;
+    animation: slideIn 0.25s ease;
+  }
+  @keyframes slideIn { from{opacity:0;transform:translateY(10px)} to{opacity:1;transform:translateY(0)} }
+
+  .q-num-label { font-size: 12px; font-weight: 600; color: #8bafc8; text-transform: uppercase; letter-spacing: 1.5px; margin-bottom: 10px; }
+  .q-text { font-size: 17px; font-weight: 600; color: var(--navy); line-height: 1.6; margin-bottom: 22px; }
+  .options { display: flex; flex-direction: column; gap: 10px; }
+  .option-btn {
+    display: flex;
+    align-items: center;
+    gap: 14px;
+    padding: 14px 18px;
+    border: 2px solid var(--border);
+    border-radius: 12px;
+    background: white;
+    cursor: pointer;
+    transition: all 0.18s;
+    text-align: left;
+    font-family: inherit;
+    font-size: 15px;
+    color: var(--navy);
+  }
+  .option-btn:hover { border-color: var(--accent); background: #f0fbff; }
+  .option-btn.selected { border-color: var(--blue); background: #e8f4fd; }
+  .option-label {
+    min-width: 32px;
+    height: 32px;
+    border-radius: 8px;
+    background: var(--light);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-weight: 700;
+    font-size: 13px;
+    color: var(--blue);
+    flex-shrink: 0;
+  }
+  .option-btn.selected .option-label { background: var(--blue); color: white; }
+
+  .nav-bar {
+    position: fixed;
+    bottom: 0; left: 0; right: 0;
+    background: white;
+    border-top: 1px solid var(--border);
+    padding: 14px 20px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 10px;
+    z-index: 100;
+  }
+  .btn-nav {
+    padding: 12px 24px;
+    border-radius: 10px;
+    border: 2px solid var(--border);
+    background: white;
+    font-family: inherit;
+    font-size: 14px;
+    font-weight: 600;
+    cursor: pointer;
+    transition: all 0.15s;
+    color: var(--navy);
+  }
+  .btn-nav:hover { border-color: var(--blue); background: var(--light); }
+  .btn-nav.primary { background: var(--blue); color: white; border-color: var(--blue); }
+  .btn-nav.primary:hover { background: #0f2a44; }
+  .btn-nav.danger { background: var(--red); color: white; border-color: var(--red); }
+
+  .answered-badge { background: var(--light); border-radius: 8px; padding: 6px 14px; font-size: 13px; color: #666; font-weight: 500; }
+  .answered-badge b { color: var(--green); }
+
+  /* ===== RESULT SCREEN ===== */
+  #result { display: none; min-height: 100vh; background: var(--navy); }
+
+  .result-hero { background: linear-gradient(135deg, #0a1628, #1a3c5e); padding: 50px 20px 40px; text-align: center; }
+  .result-name { color: var(--gold); font-size: 14px; font-weight: 600; letter-spacing: 2px; text-transform: uppercase; margin-bottom: 8px; }
+  .result-title { color: white; font-size: clamp(24px, 4vw, 40px); font-weight: 700; margin-bottom: 28px; }
+
+  .score-circle { width: 160px; height: 160px; margin: 0 auto 24px; position: relative; }
+  .score-circle svg { transform: rotate(-90deg); }
+  .score-circle .bg { fill: none; stroke: rgba(255,255,255,0.1); stroke-width: 10; }
+  .score-circle .fg { fill: none; stroke-width: 10; stroke-linecap: round; transition: stroke-dashoffset 1.5s ease; }
+  .score-inner { position: absolute; top: 50%; left: 50%; transform: translate(-50%,-50%); text-align: center; }
+  .score-pct { font-size: 36px; font-weight: 700; color: white; }
+  .score-sub { font-size: 12px; color: #8bafc8; }
+
+  .grade-badge { display: inline-block; padding: 8px 28px; border-radius: 30px; font-size: 18px; font-weight: 700; margin-bottom: 10px; letter-spacing: 1px; }
+
+  .result-cards { display: grid; grid-template-columns: repeat(auto-fit, minmax(140px, 1fr)); gap: 12px; max-width: 700px; margin: 28px auto 0; padding: 0 16px; }
+  .result-card { background: rgba(255,255,255,0.07); border: 1px solid rgba(255,255,255,0.1); border-radius: 14px; padding: 18px 14px; text-align: center; }
+  .result-card .rc-num { font-size: 26px; font-weight: 700; margin-bottom: 4px; }
+  .result-card .rc-lbl { font-size: 11px; color: #8bafc8; text-transform: uppercase; letter-spacing: 1px; }
+
+  .section-breakdown { max-width: 700px; margin: 0 auto; padding: 28px 16px; }
+  .section-breakdown h3 { color: var(--gold); font-size: 13px; text-transform: uppercase; letter-spacing: 2px; margin-bottom: 16px; }
+  .section-row { background: rgba(255,255,255,0.06); border-radius: 12px; padding: 14px 18px; margin-bottom: 10px; display: flex; align-items: center; gap: 14px; }
+  .section-row .sr-name { color: white; font-weight: 600; font-size: 14px; flex: 1; }
+  .section-row .sr-score { color: var(--accent); font-weight: 700; font-size: 14px; white-space: nowrap; }
+  .section-bar-wrap { flex: 2; height: 8px; background: rgba(255,255,255,0.1); border-radius: 4px; overflow: hidden; }
+  .section-bar { height: 100%; border-radius: 4px; transition: width 1s ease; }
+
+  .wrong-list { max-width: 700px; margin: 0 auto; padding: 0 16px 40px; }
+  .wrong-list h3 { color: var(--gold); font-size: 13px; text-transform: uppercase; letter-spacing: 2px; margin-bottom: 16px; }
+  .wrong-item { background: rgba(239,71,111,0.08); border: 1px solid rgba(239,71,111,0.2); border-radius: 12px; padding: 14px 16px; margin-bottom: 10px; font-size: 13px; }
+  .wrong-item .wi-q { color: #ccc; margin-bottom: 6px; line-height: 1.5; }
+  .wrong-item .wi-ans { display: flex; gap: 16px; flex-wrap: wrap; }
+  .wi-your { color: var(--red); }
+  .wi-correct { color: var(--green); }
+
+  .result-actions { text-align: center; padding: 10px 16px 50px; }
+  .btn-retry { background: var(--gold); color: var(--navy); border: none; padding: 14px 36px; border-radius: 10px; font-size: 15px; font-weight: 700; cursor: pointer; transition: transform 0.15s; font-family: inherit; }
+  .btn-retry:hover { transform: translateY(-2px); }
+
+  @media(max-width:500px) {
+    .question-card { padding: 18px; }
+    .q-text { font-size: 15px; }
+    .option-btn { font-size: 13px; padding: 12px 14px; }
+  }
+</style>
+</head>
+<body>
+
+<!-- WELCOME -->
+<div id="welcome">
+  <div class="logo-badge">🎓 Muzamil Hussain · MDCAT Instructor</div>
+  <h1>MDCAT <span>Mock</span><br>Test 2025</h1>
+  <p style="color:#f4a01c;font-size:13px;font-weight:600;letter-spacing:1px;margin-bottom:6px;text-transform:uppercase">By Muzamil Hussain MDCAT Instructor</p>
+  <p>Complete syllabus — 180 MCQs — 150 minutes. Bilkul real MDCAT jaisa.</p>
+  <div class="stats-row">
+    <div class="stat-box"><div class="num">180</div><div class="lbl">Questions</div></div>
+    <div class="stat-box"><div class="num">150</div><div class="lbl">Minutes</div></div>
+    <div class="stat-box"><div class="num">4</div><div class="lbl">Subjects</div></div>
+    <div class="stat-box"><div class="num">+1</div><div class="lbl">Per Correct</div></div>
+  </div>
+  <div class="name-input-wrap">
+    <input type="text" id="studentName" placeholder="Apna naam likhein..." maxlength="40"/>
+  </div>
+  <button class="btn-start" onclick="startTest()">Test Shuru Karein →</button>
+  <div class="instructions" style="margin-top:24px">
+    <b>Instructions:</b><br>
+    • Har sahi jawab = 1 mark. Koi minus marking nahi.<br>
+    • 150 minute mein 180 sawaal.<br>
+    • Har sawaal ka jawab select karein aur Next dabayein.<br>
+    • Aakhir mein result + detailed review milega.
+  </div>
+</div>
+
+<!-- QUIZ -->
+<div id="quiz">
+  <div class="quiz-header">
+    <div class="left">
+      <span class="section-tag" id="sectionTag">Biology</span>
+      <span class="q-counter" id="qCounter">Q 1 / 180</span>
+    </div>
+    <div class="timer-box" id="timerBox">150:00</div>
+  </div>
+  <div class="progress-bar"><div class="progress-fill" id="progressFill" style="width:0%"></div></div>
+  <div class="quiz-body">
+    <div class="question-card" id="questionCard">
+      <div class="q-num-label" id="qNumLabel">Question 1</div>
+      <div class="q-text" id="qText"></div>
+      <div class="options" id="optionsDiv"></div>
+    </div>
+  </div>
+  <div class="nav-bar">
+    <button class="btn-nav" onclick="prevQ()">← Pehla</button>
+    <div class="answered-badge">✓ <b id="answeredCount">0</b> / 180</div>
+    <button class="btn-nav primary" id="nextBtn" onclick="nextQ()">Agla →</button>
+  </div>
+</div>
+
+<!-- RESULT -->
+<div id="result">
+  <div class="result-hero">
+    <div class="result-name" id="resultName">Student</div>
+    <div class="result-title">Aapka Result Tayyar Hai!</div>
+    <div style="color:#8bafc8;font-size:12px;margin-top:-18px;margin-bottom:18px;letter-spacing:1px">Muzamil Hussain MDCAT Instructor</div>
+    <div class="score-circle">
+      <svg viewBox="0 0 160 160" width="160" height="160">
+        <circle class="bg" cx="80" cy="80" r="70"/>
+        <circle class="fg" id="scoreArc" cx="80" cy="80" r="70" stroke-dasharray="439.8" stroke-dashoffset="439.8"/>
+      </svg>
+      <div class="score-inner">
+        <div class="score-pct" id="scorePct">0%</div>
+        <div class="score-sub" id="scoreRaw">0/180</div>
+      </div>
+    </div>
+    <div class="grade-badge" id="gradeBadge"></div>
+  </div>
+  <div class="result-cards">
+    <div class="result-card"><div class="rc-num" id="rcCorrect" style="color:var(--green)">0</div><div class="rc-lbl">Sahi</div></div>
+    <div class="result-card"><div class="rc-num" id="rcWrong" style="color:var(--red)">0</div><div class="rc-lbl">Galat</div></div>
+    <div class="result-card"><div class="rc-num" id="rcSkipped" style="color:var(--gold)">0</div><div class="rc-lbl">Chhorey</div></div>
+    <div class="result-card"><div class="rc-num" id="rcAccuracy" style="color:var(--accent)">0%</div><div class="rc-lbl">Accuracy</div></div>
+  </div>
+  <div class="section-breakdown">
+    <h3>Subject-wise Performance</h3>
+    <div id="sectionBreakdown"></div>
+  </div>
+  <div class="wrong-list">
+    <h3>Galat Jawab — Review Karein</h3>
+    <div id="wrongList"></div>
+  </div>
+  <div class="result-actions">
+    <button class="btn-retry" onclick="location.reload()">دوبارہ Test دیں</button>
+    <p style="color:#8bafc8;font-size:12px;margin-top:16px;letter-spacing:1px">© Muzamil Hussain MDCAT Instructor 2025</p>
+  </div>
+</div>
+
+<script>
+const ALL_QUESTIONS = [
+  {s:"Biology",q:"The fluid mosaic model of plasma membrane was proposed by:",o:["Watson and Crick","Singer and Nicolson","Robert Hooke","Schleiden and Schwann"],a:1},
+  {s:"Biology",q:"Which organelle is called the 'powerhouse' of the cell?",o:["Ribosome","Golgi apparatus","Mitochondria","Lysosome"],a:2},
+  {s:"Biology",q:"Prokaryotic cells lack:",o:["Cell membrane","Ribosomes","Membrane-bound nucleus","DNA"],a:2},
+  {s:"Biology",q:"The process of programmed cell death is called:",o:["Necrosis","Apoptosis","Mitosis","Cytokinesis"],a:1},
+  {s:"Biology",q:"Which type of endoplasmic reticulum is involved in lipid synthesis?",o:["Rough ER","Smooth ER","Both A and B","Golgi body"],a:1},
+  {s:"Biology",q:"Lysosomes contain:",o:["Digestive enzymes","Photosynthetic pigments","Genetic material","Ribosomal RNA"],a:0},
+  {s:"Biology",q:"The centromere connects two:",o:["Chromosomes","Sister chromatids","Homologous pairs","Spindle fibers"],a:1},
+  {s:"Biology",q:"Which bond connects amino acids in a polypeptide chain?",o:["Hydrogen bond","Ionic bond","Peptide bond","Disulfide bond"],a:2},
+  {s:"Biology",q:"DNA is a polymer of:",o:["Amino acids","Nucleotides","Monosaccharides","Fatty acids"],a:1},
+  {s:"Biology",q:"The monomer of proteins is:",o:["Glucose","Fatty acid","Nucleotide","Amino acid"],a:3},
+  {s:"Biology",q:"Which vitamin is a coenzyme in many metabolic reactions?",o:["Vitamin A","Vitamin C","Vitamin B complex","Vitamin D"],a:2},
+  {s:"Biology",q:"Enzyme that joins DNA strands during replication:",o:["Helicase","Primase","DNA ligase","DNA polymerase I"],a:2},
+  {s:"Biology",q:"The secondary structure of proteins is maintained by:",o:["Peptide bonds","Hydrogen bonds","Ionic bonds","Covalent bonds"],a:1},
+  {s:"Biology",q:"Glycogen is the storage polysaccharide in:",o:["Plants","Animals","Bacteria","Fungi"],a:1},
+  {s:"Biology",q:"Enzymes are biological catalysts made of:",o:["Lipids","Carbohydrates","Proteins","Nucleic acids"],a:2},
+  {s:"Biology",q:"The region of an enzyme where substrate binds is:",o:["Allosteric site","Active site","Binding cleft","Catalytic pocket"],a:1},
+  {s:"Biology",q:"Competitive inhibitors bind to the:",o:["Allosteric site","Active site","Both sites","Product site"],a:1},
+  {s:"Biology",q:"Which factor does NOT affect enzyme activity?",o:["Temperature","pH","Substrate concentration","Electrode potential"],a:3},
+  {s:"Biology",q:"Lock and key model of enzyme action was proposed by:",o:["Koshland","Emil Fischer","Pauling","Krebs"],a:1},
+  {s:"Biology",q:"In photosynthesis, the light-dependent reactions occur in the:",o:["Stroma","Cytoplasm","Thylakoid membranes","Matrix"],a:2},
+  {s:"Biology",q:"The net ATP production from one glucose in glycolysis is:",o:["36","4","2","38"],a:2},
+  {s:"Biology",q:"The end product of glycolysis is:",o:["Acetyl CoA","Pyruvate","Citrate","Oxaloacetate"],a:1},
+  {s:"Biology",q:"Cyclic photophosphorylation involves:",o:["PS I only","PS II only","Both PS I and II","Neither"],a:0},
+  {s:"Biology",q:"The Krebs cycle occurs in the:",o:["Cytoplasm","Mitochondrial matrix","Inner membrane","Nucleus"],a:1},
+  {s:"Biology",q:"Photorespiration occurs in:",o:["C3 plants","C4 plants","CAM plants","All plants equally"],a:0},
+  {s:"Biology",q:"During which phase does DNA replication occur?",o:["G1 phase","S phase","G2 phase","M phase"],a:1},
+  {s:"Biology",q:"Crossing over occurs during:",o:["Mitosis prophase","Meiosis I prophase","Meiosis II","Interphase"],a:1},
+  {s:"Biology",q:"Meiosis results in cells with:",o:["2n chromosomes","4n chromosomes","n chromosomes","3n chromosomes"],a:2},
+  {s:"Biology",q:"The spindle fibers are made of:",o:["Actin","Myosin","Tubulin","Keratin"],a:2},
+  {s:"Biology",q:"Synapsis occurs between:",o:["Sister chromatids","Homologous chromosomes","Non-homologous chromosomes","Centromeres"],a:1},
+  {s:"Biology",q:"Mendel's law of independent assortment applies when genes are on:",o:["Same chromosome","Different chromosomes","Sex chromosomes only","Autosomes only"],a:1},
+  {s:"Biology",q:"The genotype of a carrier female for X-linked recessive disease is:",o:["X^H X^H","X^H X^h","X^h X^h","X^H Y"],a:1},
+  {s:"Biology",q:"A test cross is used to determine:",o:["Phenotype","Dominance","Genotype of dominant individual","Mutation rate"],a:2},
+  {s:"Biology",q:"In ABO blood group system, I^A and I^B show:",o:["Complete dominance","Incomplete dominance","Codominance","Epistasis"],a:2},
+  {s:"Biology",q:"Down syndrome is caused by trisomy of chromosome:",o:["18","21","13","X"],a:1},
+  {s:"Biology",q:"Which of the following is a frameshift mutation?",o:["Substitution","Deletion of one base","Transition","Transversion"],a:1},
+  {s:"Biology",q:"The template strand in transcription runs:",o:["5' to 3'","3' to 5'","Either direction","Anti-parallel to mRNA"],a:1},
+  {s:"Biology",q:"Which RNA carries amino acids to ribosomes?",o:["mRNA","rRNA","tRNA","snRNA"],a:2},
+  {s:"Biology",q:"The genetic code is:",o:["Ambiguous","Overlapping","Non-degenerate","Universal"],a:3},
+  {s:"Biology",q:"Okazaki fragments are found on the:",o:["Leading strand","Lagging strand","Both strands","Template strand only"],a:1},
+  {s:"Biology",q:"Restriction endonucleases cut DNA at:",o:["Random sites","Specific palindromic sequences","Promoter regions","Telomeres"],a:1},
+  {s:"Biology",q:"PCR stands for:",o:["Protein Chain Reaction","Polymerase Chain Reaction","Polynucleotide Cloning Reaction","Phosphate Cycle Reaction"],a:1},
+  {s:"Biology",q:"The enzyme used in PCR to withstand high temperatures is:",o:["DNA polymerase I","Taq polymerase","RNA polymerase","Primase"],a:1},
+  {s:"Biology",q:"Gel electrophoresis separates DNA fragments by:",o:["Charge only","Size and charge","Size only","Molecular weight only"],a:1},
+  {s:"Biology",q:"Which kingdom includes organisms with prokaryotic cells only?",o:["Protista","Fungi","Monera","Plantae"],a:2},
+  {s:"Biology",q:"Viruses are considered non-living because they:",o:["Lack metabolism outside host","Have DNA","Can mutate","Reproduce"],a:0},
+  {s:"Biology",q:"The scientific name is always written in:",o:["English","Latin or Greek, italicized","Arabic","Bold letters"],a:1},
+  {s:"Biology",q:"Rhizopus is an example of:",o:["Ascomycetes","Basidiomycetes","Zygomycetes","Deuteromycetes"],a:2},
+  {s:"Biology",q:"Pepsin works best at pH:",o:["7.4","8.0","2.0","6.5"],a:2},
+  {s:"Biology",q:"Bile is produced by the:",o:["Pancreas","Liver","Gallbladder","Small intestine"],a:1},
+  {s:"Biology",q:"Villi are found in:",o:["Stomach","Large intestine","Small intestine","Esophagus"],a:2},
+  {s:"Biology",q:"The enzyme amylase digests:",o:["Proteins","Fats","Starch","Nucleic acids"],a:2},
+  {s:"Biology",q:"The SA node is located in the:",o:["Left ventricle","Right atrium","Left atrium","AV node"],a:1},
+  {s:"Biology",q:"Diastolic blood pressure is the pressure when the heart is:",o:["Contracting","At rest/relaxing","Pumping","In systole"],a:1},
+  {s:"Biology",q:"Erythrocytes are produced in:",o:["Thymus","Spleen","Red bone marrow","Lymph nodes"],a:2},
+  {s:"Biology",q:"Normal human body temperature is:",o:["36.0°C","37.0°C","38.0°C","35.5°C"],a:1},
+  {s:"Biology",q:"Breathing rate is primarily controlled by:",o:["O2 levels","CO2/H+ levels","N2 levels","Blood pressure"],a:1},
+  {s:"Biology",q:"Surfactant in alveoli is produced by:",o:["Type I pneumocytes","Type II pneumocytes","Macrophages","Goblet cells"],a:1},
+  {s:"Biology",q:"The functional unit of the kidney is the:",o:["Nephron","Glomerulus","Loop of Henle","Collecting duct"],a:0},
+  {s:"Biology",q:"Urea is formed in the:",o:["Kidney","Liver","Spleen","Pancreas"],a:1},
+  {s:"Biology",q:"ADH increases water reabsorption in the:",o:["Loop of Henle","Glomerulus","Collecting duct","Bowman's capsule"],a:2},
+  {s:"Biology",q:"The myelin sheath is produced by:",o:["Astrocytes","Schwann cells","Microglia","Oligodendrocytes"],a:1},
+  {s:"Biology",q:"Which neurotransmitter is released at the neuromuscular junction?",o:["Dopamine","Serotonin","Acetylcholine","GABA"],a:2},
+  {s:"Biology",q:"The resting membrane potential of a neuron is approximately:",o:["+70 mV","-70 mV","0 mV","-90 mV"],a:1},
+  {s:"Biology",q:"The hormone responsible for ovulation is:",o:["FSH","LH","Progesterone","Estrogen"],a:1},
+  {s:"Biology",q:"Fertilization in humans normally occurs in the:",o:["Uterus","Cervix","Fallopian tube","Ovary"],a:2},
+  {s:"Biology",q:"Testosterone is produced by:",o:["Sertoli cells","Leydig cells","Spermatogonia","Epididymis"],a:1},
+  {s:"Biology",q:"The placenta produces:",o:["FSH","hCG","LH","ADH"],a:1},
+  {s:"Chemistry",q:"The number of moles in 44g of CO2 (M=44 g/mol) is:",o:["0.5","2","1","44"],a:2},
+  {s:"Chemistry",q:"Boyle's law states that at constant temperature, pressure is:",o:["Directly proportional to volume","Inversely proportional to volume","Independent of volume","Equal to volume"],a:1},
+  {s:"Chemistry",q:"Which quantum number describes the shape of an orbital?",o:["Principal (n)","Azimuthal (l)","Magnetic (m)","Spin (s)"],a:1},
+  {s:"Chemistry",q:"Hess's law is based on conservation of:",o:["Mass","Energy","Momentum","Charge"],a:1},
+  {s:"Chemistry",q:"Rate of reaction depends on:",o:["Concentration of reactants","Temperature","Catalyst","All of these"],a:3},
+  {s:"Chemistry",q:"At equilibrium, the rate of forward reaction:",o:["Is greater than reverse","Equals the reverse reaction rate","Is less than reverse","Becomes zero"],a:1},
+  {s:"Chemistry",q:"pH of a solution with [H+] = 0.01 mol/L is:",o:["1","2","12","7"],a:1},
+  {s:"Chemistry",q:"A buffer solution resists changes in:",o:["Temperature","Volume","pH","Pressure"],a:2},
+  {s:"Chemistry",q:"Le Chatelier's principle states that a system at equilibrium will:",o:["Always favor products","Shift to oppose the change applied","Remain unchanged","Always favor reactants"],a:1},
+  {s:"Chemistry",q:"Oxidation involves:",o:["Gain of electrons","Loss of electrons","Gain of protons","Loss of protons"],a:1},
+  {s:"Chemistry",q:"Ionization energy generally increases across a period because:",o:["Atomic radius increases","Nuclear charge increases","Electron shielding increases","Electron affinity decreases"],a:1},
+  {s:"Chemistry",q:"Electronegativity increases as you move:",o:["Down a group","Left across a period","Right across a period","Down and right"],a:2},
+  {s:"Chemistry",q:"Arrhenius equation relates rate constant with:",o:["pH","Pressure","Temperature","Concentration"],a:2},
+  {s:"Chemistry",q:"In a galvanic cell, oxidation occurs at the:",o:["Cathode","Anode","Salt bridge","Electrolyte"],a:1},
+  {s:"Chemistry",q:"The IUPAC name of CH3-CH2-OH is:",o:["Methanol","Ethanol","Propanol","Butanol"],a:1},
+  {s:"Chemistry",q:"Alkenes contain:",o:["Single bonds only","At least one C=C double bond","Triple bond","Aromatic ring"],a:1},
+  {s:"Chemistry",q:"Markovnikov's rule applies to addition reactions of:",o:["Alkanes","Alkenes","Alkynes","Aromatic compounds"],a:1},
+  {s:"Chemistry",q:"The functional group -COOH is called:",o:["Aldehyde","Ketone","Carboxylic acid","Ester"],a:2},
+  {s:"Chemistry",q:"Benzene undergoes electrophilic:",o:["Addition","Substitution","Elimination","Rearrangement"],a:1},
+  {s:"Chemistry",q:"Esterification is a reaction between:",o:["Two alcohols","Acid and base","Alcohol and carboxylic acid","Aldehyde and ketone"],a:2},
+  {s:"Chemistry",q:"The degree of unsaturation of benzene is:",o:["1","2","3","4"],a:3},
+  {s:"Chemistry",q:"Nucleophilic substitution (SN2) proceeds with:",o:["Retention of configuration","Inversion of configuration","Racemization","No stereo change"],a:1},
+  {s:"Chemistry",q:"Carboxylic acids are more acidic than alcohols because of:",o:["Resonance stabilization of carboxylate ion","Higher molecular weight","Greater polarity","Longer carbon chain"],a:0},
+  {s:"Chemistry",q:"Grignard reagent is:",o:["RMgBr","RLi","RNa","RZn"],a:0},
+  {s:"Chemistry",q:"The reaction of an alkyl halide with NaOH (aqueous) gives:",o:["Alkene","Ether","Alcohol","Aldehyde"],a:2},
+  {s:"Chemistry",q:"Saponification is hydrolysis of:",o:["Ester with acid","Ester with base","Amide","Acyl chloride"],a:1},
+  {s:"Chemistry",q:"The most electronegative element is:",o:["Oxygen","Chlorine","Fluorine","Nitrogen"],a:2},
+  {s:"Chemistry",q:"Noble gases have:",o:["Incomplete valence shell","Complete valence shell","Unpaired electrons","High reactivity"],a:1},
+  {s:"Chemistry",q:"In which group does carbon belong?",o:["Group III A","Group IV A","Group II A","Group V A"],a:1},
+  {s:"Chemistry",q:"Aqua regia is a mixture of:",o:["HCl + H2SO4","HNO3 + H2SO4","HCl + HNO3 (3:1)","HF + HCl"],a:2},
+  {s:"Chemistry",q:"The hybridization of carbon in ethyne (C2H2) is:",o:["sp3","sp2","sp","sp3d"],a:2},
+  {s:"Chemistry",q:"Which of the following is an amphoteric oxide?",o:["CaO","Na2O","Al2O3","SO2"],a:2},
+  {s:"Chemistry",q:"Transition metals exhibit variable oxidation states due to:",o:["d-orbitals","p-orbitals","f-orbitals","s-orbitals"],a:0},
+  {s:"Chemistry",q:"The VSEPR shape of water (H2O) is:",o:["Linear","Tetrahedral","Bent/angular","Trigonal planar"],a:2},
+  {s:"Chemistry",q:"Hydrogen bonding is strongest in:",o:["HCl","H2S","HF","HBr"],a:2},
+  {s:"Chemistry",q:"Molarity is defined as moles of solute per:",o:["100g of solvent","Litre of solution","Kg of solvent","100mL solvent"],a:1},
+  {s:"Chemistry",q:"A catalyst increases reaction rate by:",o:["Increasing activation energy","Decreasing activation energy","Changing equilibrium position","Providing more reactants"],a:1},
+  {s:"Chemistry",q:"Chromatography separates mixtures based on:",o:["Mass","Size","Differential affinity for stationary/mobile phase","Solubility only"],a:2},
+  {s:"Chemistry",q:"The empirical formula shows:",o:["Actual number of atoms","Simplest whole number ratio of atoms","Molecular weight","Structural arrangement"],a:1},
+  {s:"Chemistry",q:"Standard temperature and pressure (STP) is:",o:["25°C and 1 atm","0°C and 1 atm","100°C and 1 atm","0°C and 2 atm"],a:1},
+  {s:"Chemistry",q:"The product of dehydration of an alcohol is:",o:["Aldehyde","Alkene","Ether","Alkane"],a:1},
+  {s:"Chemistry",q:"Phenol is more acidic than alcohol because of:",o:["Resonance delocalization of phenoxide ion","More OH groups","Aromaticity","Higher molecular weight"],a:0},
+  {s:"Chemistry",q:"Diazotization reaction involves treatment of primary aromatic amine with:",o:["NaOH","NaNO2/HCl at 0-5°C","H2SO4","Br2 water"],a:1},
+  {s:"Chemistry",q:"Optical isomers have the same physical properties except:",o:["Melting point","Solubility","Rotation of plane polarized light","Density"],a:2},
+  {s:"Chemistry",q:"The strongest acid among the following is:",o:["CH3COOH","CCl3COOH","CBr3COOH","CF3COOH"],a:3},
+  {s:"Chemistry",q:"Which law states that pressure of a gas mixture equals sum of partial pressures?",o:["Boyle's law","Charles' law","Dalton's law","Graham's law"],a:2},
+  {s:"Chemistry",q:"The unit of rate constant for first order reaction is:",o:["mol/L·s","L/mol·s","s-1","mol2/L2·s"],a:2},
+  {s:"Chemistry",q:"Entropy (S) is a measure of:",o:["Energy","Disorder/randomness","Heat content","Work"],a:1},
+  {s:"Chemistry",q:"A spontaneous process at constant T and P has:",o:["Positive ΔG","Negative ΔG","Zero ΔG","Positive ΔH"],a:1},
+  {s:"Chemistry",q:"Colligative properties depend on:",o:["Nature of solute","Number of solute particles","Volume of solution","Temperature only"],a:1},
+  {s:"Chemistry",q:"The process of converting a solid directly to gas is called:",o:["Evaporation","Condensation","Sublimation","Fusion"],a:2},
+  {s:"Chemistry",q:"van der Waals forces are strongest in molecules with:",o:["Small molecular mass","High polarity and large surface area","Ionic bonding","No electrons"],a:1},
+  {s:"Chemistry",q:"The equivalent weight of H2SO4 in neutralization is:",o:["98","49","24.5","196"],a:1},
+  {s:"Chemistry",q:"Which type of isomerism does 1-butene and 2-butene show?",o:["Chain isomerism","Positional isomerism","Functional group isomerism","Optical isomerism"],a:1},
+  {s:"Physics",q:"The SI unit of force is:",o:["Joule","Newton","Pascal","Watt"],a:1},
+  {s:"Physics",q:"Which of the following is a vector quantity?",o:["Mass","Speed","Velocity","Temperature"],a:2},
+  {s:"Physics",q:"Newton's second law states F =",o:["mv","ma","m/a","v/t"],a:1},
+  {s:"Physics",q:"Work done is zero when force and displacement are:",o:["Parallel","Anti-parallel","Perpendicular","Equal"],a:2},
+  {s:"Physics",q:"The unit of power is:",o:["Joule","Newton","Watt","Pascal"],a:2},
+  {s:"Physics",q:"According to the law of conservation of energy:",o:["Energy is created in chemical reactions","Energy cannot be created or destroyed","Energy is destroyed in friction","Energy is always kinetic"],a:1},
+  {s:"Physics",q:"In projectile motion, the horizontal component of velocity:",o:["Increases","Decreases","Remains constant","Becomes zero at peak"],a:2},
+  {s:"Physics",q:"Escape velocity from Earth's surface is approximately:",o:["7.9 km/s","11.2 km/s","3.0 km/s","9.8 km/s"],a:1},
+  {s:"Physics",q:"Hooke's law states that stress is proportional to:",o:["Volume","Strain","Pressure","Temperature"],a:1},
+  {s:"Physics",q:"The pressure at a depth h in a liquid is:",o:["ρgh","ρg/h","mgh","ρg+h"],a:0},
+  {s:"Physics",q:"The speed of sound in air at 0°C is approximately:",o:["300 m/s","332 m/s","3×10⁸ m/s","1500 m/s"],a:1},
+  {s:"Physics",q:"Resonance occurs when applied frequency equals:",o:["Double the natural frequency","Natural frequency of the system","Half the natural frequency","Any frequency"],a:1},
+  {s:"Physics",q:"Ohm's law states that V =",o:["I/R","IR","I+R","R/I"],a:1},
+  {s:"Physics",q:"The unit of electrical resistance is:",o:["Volt","Ampere","Ohm","Coulomb"],a:2},
+  {s:"Physics",q:"In a series circuit, the current through each component is:",o:["Different","Same","Zero","Halved"],a:1},
+  {s:"Physics",q:"Magnetic force on a moving charge is given by:",o:["F = qE","F = qvB sinθ","F = qvB cosθ","F = mv²/r"],a:1},
+  {s:"Physics",q:"Electromagnetic induction was discovered by:",o:["Maxwell","Faraday","Ampere","Coulomb"],a:1},
+  {s:"Physics",q:"The speed of light in vacuum is:",o:["3×10⁶ m/s","3×10⁸ m/s","3×10¹⁰ m/s","3×10⁴ m/s"],a:1},
+  {s:"Physics",q:"Total internal reflection occurs when light travels from:",o:["Rarer to denser medium above critical angle","Denser to rarer medium above critical angle","Rarer to denser at any angle","Denser to rarer at any angle"],a:1},
+  {s:"Physics",q:"The photoelectric effect shows light behaves as:",o:["Wave","Particle (photon)","Both simultaneously","Neither"],a:1},
+  {s:"Physics",q:"De Broglie wavelength is given by λ =",o:["hf","h/mv","mv/h","hv"],a:1},
+  {s:"Physics",q:"Half-life is the time for radioactive material to:",o:["Fully decay","Reduce to half its amount","Double","Stabilize"],a:1},
+  {s:"Physics",q:"In nuclear fission, a heavy nucleus:",o:["Absorbs a neutron and gains mass","Splits into smaller nuclei releasing energy","Fuses with another nucleus","Emits only gamma rays"],a:1},
+  {s:"Physics",q:"A convex lens is a:",o:["Diverging lens","Converging lens","Flat lens","Concave lens"],a:1},
+  {s:"Physics",q:"The image formed by a plane mirror is:",o:["Real and inverted","Virtual and erect","Real and erect","Virtual and inverted"],a:1},
+  {s:"Physics",q:"Kirchhoff's current law (KCL) states:",o:["Sum of voltages in a loop is zero","Sum of currents entering a node equals sum leaving","Power = V×I","Resistance adds in series"],a:1},
+  {s:"Physics",q:"Capacitance is the ability to store:",o:["Current","Magnetic flux","Electrical charge","Power"],a:2},
+  {s:"Physics",q:"The time period of a simple pendulum depends on:",o:["Mass of bob","Amplitude","Length of pendulum and g","Material of string"],a:2},
+  {s:"Physics",q:"Young's modulus is defined as:",o:["Shear stress/shear strain","Tensile stress/tensile strain","Volume stress/volume strain","Force/area"],a:1},
+  {s:"Physics",q:"The first law of thermodynamics is a statement of:",o:["Conservation of momentum","Conservation of energy","Entropy","Newton's second law"],a:1},
+  {s:"Physics",q:"Which colour of visible light has the highest frequency?",o:["Red","Yellow","Green","Violet"],a:3},
+  {s:"Physics",q:"X-rays have wavelength:",o:["Longer than visible light","Same as visible light","Shorter than visible light","Same as radio waves"],a:2},
+  {s:"Physics",q:"Binding energy per nucleon is highest for:",o:["Hydrogen","Iron (Fe-56)","Uranium","Helium"],a:1},
+  {s:"Physics",q:"In an adiabatic process:",o:["Temperature is constant","No heat exchange with surroundings","Pressure is constant","Volume is constant"],a:1},
+  {s:"Physics",q:"Torque is defined as:",o:["Force × velocity","Force × perpendicular distance from axis","Mass × acceleration","Momentum × time"],a:1},
+  {s:"Physics",q:"Which type of wave requires a medium for propagation?",o:["Light waves","X-rays","Sound waves","Gamma rays"],a:2},
+  {s:"Physics",q:"In simple harmonic motion, acceleration is:",o:["Constant","Maximum at equilibrium","Proportional to displacement, directed toward equilibrium","Zero at extreme position"],a:2},
+  {s:"Physics",q:"The phenomenon of diffraction is the bending of waves around:",o:["Prism","Lens","Obstacles or slits","Mirror"],a:2},
+  {s:"Physics",q:"A transformer works on the principle of:",o:["Electrostatics","Mutual induction","Self induction","Photoelectric effect"],a:1},
+  {s:"Physics",q:"The unit of magnetic flux is:",o:["Tesla","Weber","Henry","Coulomb"],a:1},
+  {s:"Physics",q:"Root mean square speed of gas molecules is proportional to:",o:["√T","T","T²","1/T"],a:0},
+  {s:"Physics",q:"Pair production is the conversion of a photon into:",o:["Two photons","An electron and positron","A proton and neutron","Alpha particle"],a:1},
+  {s:"Physics",q:"The critical angle is the angle of incidence for which the angle of refraction is:",o:["45°","90°","0°","Equal to incident angle"],a:1},
+  {s:"Physics",q:"Gravitational potential energy =",o:["mgh","mv²","½mv²","F/d"],a:0},
+  {s:"English",q:"Choose the correct synonym of 'Benevolent':",o:["Cruel","Kind","Angry","Indifferent"],a:1},
+  {s:"English",q:"The antonym of 'Loquacious' is:",o:["Talkative","Verbose","Taciturn","Garrulous"],a:2},
+  {s:"English",q:"Identify the correct sentence:",o:["She don't know the answer","She doesn't knows the answer","She doesn't know the answer","She not know the answer"],a:2},
+  {s:"English",q:"The word 'Ambiguous' means:",o:["Clear and definite","Having two or more possible meanings","Completely wrong","Very simple"],a:1},
+  {s:"English",q:"Choose the correct passive voice: 'They built the house in 1990'",o:["The house was built in 1990","The house is built in 1990","The house has been built in 1990","The house will be built in 1990"],a:0},
+  {s:"English",q:"A 'Pharmacist' is a person who:",o:["Studies diseases","Prepares and dispenses medicines","Performs surgery","Treats mental illness"],a:1},
+  {s:"English",q:"The plural of 'Criterion' is:",o:["Criterions","Criteria","Criterias","Criterian"],a:1},
+  {s:"English",q:"Which word is spelled correctly?",o:["Accomodate","Acommodate","Accommodate","Accomodate"],a:2},
+  {s:"English",q:"Identify the clause type: 'The patient whose leg was broken recovered quickly.'",o:["Noun clause","Adverb clause","Relative/Adjective clause","Independent clause"],a:2},
+  {s:"English",q:"The word 'Prognosis' relates to:",o:["Diagnosis of a disease","Prediction of disease outcome","Treatment of disease","Cause of disease"],a:1},
+  {s:"English",q:"A doctor who specializes in heart diseases is called a:",o:["Neurologist","Cardiologist","Dermatologist","Oncologist"],a:1},
+  {s:"English",q:"Fill in: The doctor ______ the patient three times this week.",o:["examined","has examined","examines","had examined"],a:1},
+  {s:"English",q:"The word 'Intravenous' means:",o:["Under the skin","Within a vein","Into a muscle","Through the stomach"],a:1},
+  {s:"English",q:"Identify the figure of speech: 'The wind whispered through the trees.'",o:["Simile","Metaphor","Personification","Hyperbole"],a:2},
+];
+
+let currentQ = 0;
+let answers = new Array(ALL_QUESTIONS.length).fill(null);
+let timerInterval = null;
+let totalSeconds = 150 * 60;
+let studentName = "";
+
+function startTest() {
+  studentName = document.getElementById('studentName').value.trim() || "Student";
+  document.getElementById('welcome').style.display = 'none';
+  document.getElementById('quiz').style.display = 'block';
+  renderQuestion();
+  startTimer();
+}
+
+function startTimer() {
+  timerInterval = setInterval(() => {
+    totalSeconds--;
+    updateTimer();
+    if (totalSeconds <= 0) { clearInterval(timerInterval); submitTest(); }
+  }, 1000);
+}
+
+function updateTimer() {
+  const m = Math.floor(totalSeconds / 60);
+  const s = totalSeconds % 60;
+  const txt = String(m).padStart(2,'0') + ':' + String(s).padStart(2,'0');
+  const box = document.getElementById('timerBox');
+  box.textContent = txt;
+  box.className = 'timer-box';
+  if (totalSeconds <= 300) box.classList.add('danger');
+  else if (totalSeconds <= 900) box.classList.add('warning');
+}
+
+function renderQuestion() {
+  const q = ALL_QUESTIONS[currentQ];
+  const labels = ['A','B','C','D'];
+  document.getElementById('sectionTag').textContent = q.s;
+  document.getElementById('qCounter').textContent = 'Q ' + (currentQ+1) + ' / ' + ALL_QUESTIONS.length;
+  document.getElementById('qNumLabel').textContent = 'Question ' + (currentQ+1);
+  document.getElementById('qText').textContent = q.q;
+  document.getElementById('progressFill').style.width = ((currentQ+1)/ALL_QUESTIONS.length*100) + '%';
+
+  const answered = answers.filter(a => a !== null).length;
+  document.getElementById('answeredCount').textContent = answered;
+
+  const nextBtn = document.getElementById('nextBtn');
+  if (currentQ === ALL_QUESTIONS.length - 1) {
+    nextBtn.textContent = 'Submit Test ✓';
+    nextBtn.className = 'btn-nav danger';
+  } else {
+    nextBtn.textContent = 'Agla →';
+    nextBtn.className = 'btn-nav primary';
+  }
+
+  const optDiv = document.getElementById('optionsDiv');
+  optDiv.innerHTML = '';
+  q.o.forEach((opt, i) => {
+    const btn = document.createElement('button');
+    btn.className = 'option-btn' + (answers[currentQ] === i ? ' selected' : '');
+    btn.innerHTML = '<span class="option-label">' + labels[i] + '</span>' + opt;
+    btn.onclick = () => selectAnswer(i);
+    optDiv.appendChild(btn);
+  });
+
+  const card = document.getElementById('questionCard');
+  card.style.animation = 'none';
+  card.offsetHeight;
+  card.style.animation = 'slideIn 0.25s ease';
+}
+
+function selectAnswer(idx) {
+  answers[currentQ] = idx;
+  renderQuestion();
+}
+
+function nextQ() {
+  if (currentQ === ALL_QUESTIONS.length - 1) {
+    if (confirm('Test submit karna chahte hain? Baad mein change nahi hoga.')) submitTest();
+    return;
+  }
+  currentQ++;
+  renderQuestion();
+}
+
+function prevQ() {
+  if (currentQ > 0) { currentQ--; renderQuestion(); }
+}
+
+function submitTest() {
+  clearInterval(timerInterval);
+  document.getElementById('quiz').style.display = 'none';
+  document.getElementById('result').style.display = 'block';
+  showResult();
+}
+
+function showResult() {
+  let correct = 0, wrong = 0, skipped = 0;
+  const sectionStats = {};
+
+  ALL_QUESTIONS.forEach((q, i) => {
+    if (!sectionStats[q.s]) sectionStats[q.s] = {total:0, correct:0};
+    sectionStats[q.s].total++;
+    if (answers[i] === null) skipped++;
+    else if (answers[i] === q.a) { correct++; sectionStats[q.s].correct++; }
+    else wrong++;
+  });
+
+  const pct = Math.round(correct / ALL_QUESTIONS.length * 100);
+  document.getElementById('resultName').textContent = studentName + ' ka Result';
+  document.getElementById('scorePct').textContent = pct + '%';
+  document.getElementById('scoreRaw').textContent = correct + '/' + ALL_QUESTIONS.length;
+  document.getElementById('rcCorrect').textContent = correct;
+  document.getElementById('rcWrong').textContent = wrong;
+  document.getElementById('rcSkipped').textContent = skipped;
+  const attempted = answers.filter(a => a !== null).length;
+  document.getElementById('rcAccuracy').textContent = attempted > 0 ? Math.round(correct/attempted*100) + '%' : '0%';
+
+  let grade, gColor;
+  if (pct >= 85) { grade = "EXCELLENT ⭐"; gColor = "var(--green)"; }
+  else if (pct >= 70) { grade = "GOOD 👍"; gColor = "var(--accent)"; }
+  else if (pct >= 50) { grade = "AVERAGE 📚"; gColor = "var(--gold)"; }
+  else { grade = "Need More Practice 💪"; gColor = "var(--red)"; }
+  const gb = document.getElementById('gradeBadge');
+  gb.textContent = grade;
+  gb.style.background = gColor;
+  gb.style.color = (pct >= 85 || pct >= 70) ? 'white' : 'var(--navy)';
+
+  const circumference = 439.8;
+  const offset = circumference - (pct/100) * circumference;
+  const arc = document.getElementById('scoreArc');
+  arc.style.stroke = pct >= 70 ? 'var(--green)' : pct >= 50 ? 'var(--gold)' : 'var(--red)';
+  setTimeout(() => { arc.style.strokeDashoffset = offset; }, 300);
+
+  const secColors = {Biology:'#00b4d8', Chemistry:'#06d6a0', Physics:'#f4a01c', English:'#ef476f'};
+  const sbDiv = document.getElementById('sectionBreakdown');
+  Object.entries(sectionStats).forEach(([sec, st]) => {
+    const p = Math.round(st.correct / st.total * 100);
+    const color = secColors[sec] || 'var(--accent)';
+    sbDiv.innerHTML += '<div class="section-row"><div class="sr-name">' + sec + '</div><div class="section-bar-wrap"><div class="section-bar" style="width:0%;background:' + color + '" data-width="' + p + '%"></div></div><div class="sr-score">' + st.correct + '/' + st.total + ' (' + p + '%)</div></div>';
+  });
+  setTimeout(() => {
+    document.querySelectorAll('.section-bar').forEach(b => { b.style.width = b.dataset.width; });
+  }, 400);
+
+  const wDiv = document.getElementById('wrongList');
+  const labels = ['A','B','C','D'];
+  let wrongCount = 0;
+  ALL_QUESTIONS.forEach((q, i) => {
+    if (answers[i] !== null && answers[i] !== q.a) {
+      wrongCount++;
+      if (wrongCount <= 30) {
+        wDiv.innerHTML += '<div class="wrong-item"><div class="wi-q"><b>Q' + (i+1) + ' (' + q.s + '):</b> ' + q.q + '</div><div class="wi-ans"><span class="wi-your">✗ Aapka: ' + labels[answers[i]] + ') ' + q.o[answers[i]] + '</span><span class="wi-correct">✓ Sahi: ' + labels[q.a] + ') ' + q.o[q.a] + '</span></div></div>';
+      }
+    }
+  });
+  if (wrongCount === 0) wDiv.innerHTML = '<p style="color:var(--green);font-size:14px;padding:10px 0">🎉 Koi galat jawab nahi! Zabardast!</p>';
+  if (wrongCount > 30) wDiv.innerHTML += '<p style="color:#8bafc8;font-size:13px;margin-top:8px">...aur ' + (wrongCount-30) + ' galat jawab. Detail review karein.</p>';
+}
+</script>
+</body>
+</html>
